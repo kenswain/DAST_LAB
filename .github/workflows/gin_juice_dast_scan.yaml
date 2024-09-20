@@ -1,4 +1,4 @@
-name: CxONE Dast API Scan Altoro Mutual
+name: CxONE Dast Scan Gin and Juice
 on:
   #pull_request:
   # branches:
@@ -6,7 +6,7 @@ on:
   #push: 
   # branches:
   # - main
-   
+    
   workflow_dispatch: #adds a 'run now' button
   
 permissions:
@@ -39,19 +39,18 @@ jobs:
           # canary: 
           # CX_APIKEY: ${{ secrets.CANARY_API_KEY }}
         with:
-            command: "api"
-            config: './altoro_mutual.yaml'
-            openapi: './altoro_mutual.json'
+            command: web
+            config: './gin_juice_noauth.yaml'
             log_level: info
             #prod
             base_url: "https://ast.checkmarx.net"
-            environment_id: "19c8a470-1b0c-4766-b807-5e839a65c31b"
+            environment_id: "e64ac486-f2e3-486e-8757-fece216af179"
             # canary
             #base_url: "https://deu.ast.checkmarx.net"
             #environment_id: "xxx"
             fail_on: ""
             verbose: true
-            output: ${{ github.workspace }}/output_fold
+            output: ${{ github.workspace }}/output_fold #./output
       - name: Reclaim output directory
         if: always()
         run: sudo chown -R 1001:1001 ${{ github.workspace }}/output_fold
@@ -60,4 +59,4 @@ jobs:
         name: Upload Logs
         with:
           name: report
-          path: ${{ github.workspace }}/output_fold   
+          path: ${{ github.workspace }}/output_fold

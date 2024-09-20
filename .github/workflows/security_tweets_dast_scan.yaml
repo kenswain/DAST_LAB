@@ -1,4 +1,4 @@
-name: CxONE Dast API Scan Altoro Mutual
+name: CxONE Dast Scan Security Tweets
 on:
   #pull_request:
   # branches:
@@ -6,7 +6,7 @@ on:
   #push: 
   # branches:
   # - main
-   
+    
   workflow_dispatch: #adds a 'run now' button
   
 permissions:
@@ -39,16 +39,15 @@ jobs:
           # canary: 
           # CX_APIKEY: ${{ secrets.CANARY_API_KEY }}
         with:
-            command: "api"
-            config: './altoro_mutual.yaml'
-            openapi: './altoro_mutual.json'
+            command: web
+            config: './security_tweets.yaml'
             log_level: info
             #prod
             base_url: "https://ast.checkmarx.net"
-            environment_id: "19c8a470-1b0c-4766-b807-5e839a65c31b"
+            environment_id: "2a9f8f9a-5a62-468c-85ef-27bfbabf01bf"
             # canary
             #base_url: "https://deu.ast.checkmarx.net"
-            #environment_id: "xxx"
+            #environment_id: "fd6ea573-a228-47e1-b5f8-573525251bc0"
             fail_on: ""
             verbose: true
             output: ${{ github.workspace }}/output_fold
@@ -60,4 +59,4 @@ jobs:
         name: Upload Logs
         with:
           name: report
-          path: ${{ github.workspace }}/output_fold   
+          path: ${{ github.workspace }}/output_fold
